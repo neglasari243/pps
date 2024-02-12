@@ -33,10 +33,16 @@
         background-color: #ccc; /* Warna abu muda */
       }
       p {
-        font-weight: bold; /* Membuat teks menjadi tebal */
+        font-weight: inherit; /* Membuat teks menjadi tebal */
       }
       .highlight {
-        color: red; /* Mengatur warna teks menjadi merah */
+        color: #ff5733; /* Warna yang mencolok */
+      }
+
+      .centered {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 5px; /* Jarak antara tanda baca dan teks */
       }
 
       .copyright {
@@ -249,18 +255,22 @@
     <br />
     <h3>JADI:</h3>
     <p>
-      1. Jumlah pengguna hak pilih <span class="highlight">=</span> Jumlah surat
-      suara yang di gunakan <span class="highlight">=</span> Jumlah surat suara
-      sah dan tidak sah
+      1. Jumlah pengguna hak pilih
+      <span class="centered"><span class="highlight">=</span></span>
+      Jumlah surat suara yang di gunakan
+      <span class="centered"><span class="highlight">=</span></span>
+      Jumlah surat suara sah dan tidak sah
     </p>
-    <br />
     <p>
       2. Jumlah surat suara yang di gunakan
-      <span class="highlight">+</span> Jumlah surat suara kembali(rusak/salah
-      coblos) <span class="highlight">+</span> Jumlah surat suara tidak di
-      gunakan/sisa <span class="highlight">=</span> Jumlah surat suara yang di
-      terima
+      <span class="highlight">+</span>
+      Jumlah surat suara kembali(rusak/salah coblos)
+      <span class="highlight">+</span>
+      Jumlah surat suara tidak di gunakan/sisa
+      <span class="centered"><span class="highlight">=</span></span>
+      Jumlah surat suara yang di terima
     </p>
+    <br />
     <!-- Tulisan copyright -->
     <div class="copyright">
       &copy; <span class="highlight">2024</span> Apik Wibisono (SCRAVIEX_DEV).
