@@ -38,10 +38,24 @@
       .highlight {
         color: red; /* Mengatur warna teks menjadi merah */
       }
+
+      .copyright {
+        font-size: 14px;
+        text-align: center;
+        color: #666;
+        margin-top: 20px;
+        font-style: italic;
+        text-transform: uppercase;
+      }
+
+      .highlight {
+        color: #ff5733; /* Warna yang mencolok */
+      }
     </style>
   </head>
   <body>
     <h2>REKAPITULASI C.HASIL</h2>
+    <span>by. Apik Wibisono</span>
     <h3>I. DATA PEMILIH DAN PENGGUNA HAK PILIH</h3>
     <h4>A. DATA PEMILIH</h4>
     <table id="table1a">
@@ -247,7 +261,10 @@
       gunakan/sisa <span class="highlight">=</span> Jumlah surat suara yang di
       terima
     </p>
-    <p><span>by. Apik Wibisono</span></p>
+    <!-- Tulisan copyright -->
+    <div class="copyright">
+      &copy; <span class="highlight">2024</span> Apik Wibisono (SCRAVIEX_DEV).
+    </div>
 
     <script>
       // Fungsi untuk menghitung jumlah dari kolom Laki-Laki dan Perempuan dan menampilkan hasilnya di kolom Jumlah (L+P)
