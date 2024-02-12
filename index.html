@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPS DESA NEGLASARI</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        text-align: center;
+        background-color: #f2f2f2;
+      }
+      th:first-child,
+      td:first-child {
+        width: 45%; /* Lebar kolom Uraian */
+        min-width: 100px; /* Lebar minimal */
+      }
+      input {
+        width: 100%; /* Lebar kolom input */
+        box-sizing: border-box;
+      }
+      input[readonly] {
+        background-color: #ccc; /* Warna abu muda */
+      }
+      p {
+        font-weight: bold; /* Membuat teks menjadi tebal */
+      }
+      .highlight {
+        color: red; /* Mengatur warna teks menjadi merah */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>REKAPITULASI C.HASIL</h2>
+    <h3>I. DATA PEMILIH DAN PENGGUNA HAK PILIH</h3>
+    <h4>A. DATA PEMILIH</h4>
+    <table id="table1a">
+      <tr>
+        <th>Uraian</th>
+        <th>Laki_Laki</th>
+        <th>Perempuan</th>
+        <th>Jumlah(L+P)</th>
+      </tr>
+      <tr>
+        <td>Jumlah Pemilih dalam DPT</td>
+        <td>
+          <input
+            type="number"
+            id="num1a_l"
+            name="num1a_l"
+            onchange="calculateTotal('table1a')"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            id="num1a_p"
+            name="num1a_p"
+            onchange="calculateTotal('table1a')"
+          />
+        </td>
+        <td><input type="number" id="num1a_j" name="num1a_j" readonly /></td>
+      </tr>
+    </table>
+
+    <h4>B. PENGGUNA HAK PILIH</h4>
+    <table id="table1b">
+      <tr>
+        <th>Uraian</th>
+        <th>Laki_Laki</th>
+        <th>Perempuan</th>
+        <th>Jumlah(L+P)</th>
+      </tr>
+      <tr>
+        <td>1. Jumlah pengguna hak pilih DPT</td>
+        <td>
+          <input
+            type="number"
+            id="num1b1_l"
+            name="num1b1_l"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            id="num1b1_p"
+            name="num1b1_p"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td><input type="number" id="num1b1_j" name="num1b1_j" readonly /></td>
+      </tr>
+      <tr>
+        <td>2. Jumlah pengguna hak pilih DPTb</td>
+        <td>
+          <input
+            type="number"
+            id="num1b2_l"
+            name="num1b2_l"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            id="num1b2_p"
+            name="num1b2_p"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td><input type="number" id="num1b2_j" name="num1b2_j" readonly /></td>
+      </tr>
+      <tr>
+        <td>3. Jumlah pengguna hak pilih DPK</td>
+        <td>
+          <input
+            type="number"
+            id="num1b3_l"
+            name="num1b3_l"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            id="num1b3_p"
+            name="num1b3_p"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td><input type="number" id="num1b3_j" name="num1b3_j" readonly /></td>
+      </tr>
+      <tr>
+        <td>4. Jumlah pengguna hak pilih (B.1+B2+B3)</td>
+        <td>
+          <input
+            type="number"
+            id="num1b4_l"
+            name="num1b4_l"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            id="num1b4_p"
+            name="num1b4_p"
+            onchange="calculateTotal('table1b')"
+          />
+        </td>
+        <td><input type="number" id="num1b4_j" name="num1b4_j" readonly /></td>
+      </tr>
+    </table>
+
+    <h3>II. DATA PENGGUNA SURAT SUARA</h3>
+    <table>
+      <tr>
+        <th>Uraian</th>
+        <th>Jumlah</th>
+      </tr>
+      <tr>
+        <td>1. Jumlah surat suara termasuk cadangan 2% dari DPT (real)</td>
+        <td><input type="number" id="num2_1" readonly /></td>
+      </tr>
+      <tr>
+        <td>2. Jumlah surat suara yang di gunakan</td>
+        <td><input type="number" id="num2_2" readonly /></td>
+      </tr>
+      <tr>
+        <td>3. Jumlah surat suara kembali (rusak/keliru coblos)</td>
+        <td>
+          <input
+            type="number"
+            id="num2_3"
+            onchange="calculateTotalSuratSuara()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>4. Jumlah surat suara tidak digunakan (sisa)</td>
+        <td>
+          <input
+            type="number"
+            id="num2_4"
+            onchange="calculateTotalSuratSuara()"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <h3>V. DATA SUARA SAH DAN TIDAK SAH</h3>
+    <table>
+      <tr>
+        <th>Uraian</th>
+        <th>Jumlah</th>
+      </tr>
+      <tr>
+        <td>A. Jumlah surat suara SAH</td>
+        <td>
+          <input
+            type="number"
+            id="num5_A"
+            name="num5_A"
+            onchange="calculateTotal5()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>B. Jumlah surat suara TIDAK SAH</td>
+        <td>
+          <input
+            type="number"
+            id="num5_B"
+            name="num5_B"
+            onchange="calculateTotal5()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>C. Jumlah surat suara SAH dan TIDAK SAH</td>
+        <td><input type="number" id="num15_C" name="num15_C" readonly /></td>
+      </tr>
+    </table>
+    <br />
+    <h3>JADI:</h3>
+    <p>
+      1. Jumlah pengguna hak pilih <span class="highlight">=</span> Jumlah surat
+      suara yang di gunakan <span class="highlight">=</span> Jumlah surat suara
+      sah dan tidak sah
+    </p>
+    <br />
+    <p>
+      2. Jumlah surat suara yang di gunakan
+      <span class="highlight">+</span> Jumlah surat suara kembali(rusak/salah
+      coblos) <span class="highlight">+</span> Jumlah surat suara tidak di
+      gunakan/sisa <span class="highlight">=</span> Jumlah surat suara yang di
+      terima
+    </p>
+
+    <script>
+      // Fungsi untuk menghitung jumlah dari kolom Laki-Laki dan Perempuan dan menampilkan hasilnya di kolom Jumlah (L+P)
+      function calculateTotal(tableId) {
+        var table = document.getElementById(tableId);
+        var rows = table.getElementsByTagName("tr");
+        for (var i = 1; i < rows.length; i++) {
+          var cells = rows[i].getElementsByTagName("td");
+          var l =
+            parseInt(cells[1].getElementsByTagName("input")[0].value) || 0;
+          var p =
+            parseInt(cells[2].getElementsByTagName("input")[0].value) || 0;
+          cells[3].getElementsByTagName("input")[0].value = l + p; // Menampilkan jumlah per baris di kolom Jumlah (L+P)
+        }
+
+        var totalL = 0;
+        var totalP = 0;
+        for (var i = 1; i <= 3; i++) {
+          // Menghitung hanya poin 1, 2, dan 3
+          var l =
+            parseInt(document.getElementById("num1b" + i + "_l").value) || 0;
+          var p =
+            parseInt(document.getElementById("num1b" + i + "_p").value) || 0;
+          totalL += l;
+          totalP += p;
+        }
+        // Menampilkan total laki-laki dan perempuan dari poin 1, 2, dan 3 di kolom poin 4
+        document.getElementById("num1b4_l").value = totalL;
+        document.getElementById("num1b4_p").value = totalP;
+        document.getElementById("num1b4_j").value = totalL + totalP;
+
+        // Update nilai num2_2 dengan nilai num1b4_j
+        document.getElementById("num2_2").value =
+          document.getElementById("num1b4_j").value;
+      }
+    </script>
+    <script>
+      // Fungsi untuk menghitung jumlah surat suara yang digunakan
+      function calculateTotalSuratSuara() {
+        var num2_2 = parseInt(document.getElementById("num2_2").value) || 0;
+        var num2_3 = parseInt(document.getElementById("num2_3").value) || 0;
+        var num2_4 = parseInt(document.getElementById("num2_4").value) || 0;
+        var totalSuratSuara = num2_2 + num2_3 + num2_4;
+        document.getElementById("num2_1").value = totalSuratSuara;
+      }
+    </script>
+
+    <script>
+      // Fungsi untuk menghitung jumlah surat suara SAH dan TIDAK SAH
+      function calculateTotal5() {
+        var numA = parseInt(document.getElementById("num5_A").value) || 0;
+        var numB = parseInt(document.getElementById("num5_B").value) || 0;
+        var numC = numA + numB;
+        document.getElementById("num15_C").value = numC;
+
+        // Memeriksa kesamaan nilai num2_2 dan num15_C
+        var num2_2_value =
+          parseInt(document.getElementById("num2_2").value) || 0;
+        var num15_C_value =
+          parseInt(document.getElementById("num15_C").value) || 0;
+        if (num2_2_value === num15_C_value) {
+          document.getElementById("num2_2").style.color = "green";
+          document.getElementById("num15_C").style.color = "green";
+        } else {
+          document.getElementById("num2_2").style.color = "red";
+          document.getElementById("num15_C").style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
