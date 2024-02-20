@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perolehan Suara Caleg Ciamis Dapil 6</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Perolehan Suara Caleg Ciamis Dapil 6</h2>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Suara Total</th>
+          <th>Suara Calon</th>
+          <th>Partai</th>
+          <th>No Calon</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h4>Data di ambil dari Sirekap KPU by Apik Wibisono</h4>
+    <script>
+      function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      const partyMap = {
+        1: "PKB",
+        2: "GERINDRA",
+        3: "PDIP",
+        4: "GOLKAR",
+        5: "NASDEM",
+        8: "PKS",
+        12: "PAN",
+        13: "PBB",
+        14: "DEMOKRAT",
+        17: "PPP",
+      };
+
+      fetch(
+        "https://sirekap-obj-data.kpu.go.id/pemilu/hhcd/pdprdk/32/3207/320706.json"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const tableBody = document.querySelector("#data-table tbody");
+          let counter = 1;
+          Object.entries(data.table)
+            .sort((a, b) => b[1].jml_suara_total - a[1].jml_suara_total)
+            .slice(0, 9)
+            .forEach(([key, item], index) => {
+              const row = document.createElement("tr");
+              let maxVal = 0;
+              let maxKey = "";
+              for (const [subKey, value] of Object.entries(item)) {
+                if (
+                  subKey !== "jml_suara_total" &&
+                  subKey !== "jml_suara_partai" &&
+                  value > maxVal
+                ) {
+                  maxVal = value;
+                  maxKey = subKey;
+                }
+              }
+              const maxIndex = Object.keys(item).indexOf(maxKey) + 1;
+              row.innerHTML = `
+                  <td>${counter}</td>
+                  <td>${formatNumber(item.jml_suara_total)}</td>
+                  <td>${formatNumber(maxVal)}</td>
+                  <td>${partyMap[key] || key}</td>
+                  <td>${maxIndex}</td>
+              `;
+              tableBody.appendChild(row);
+              counter++;
+            });
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    </script>
+  </body>
+</html>
