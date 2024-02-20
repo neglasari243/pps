@@ -25,6 +25,11 @@
   </head>
   <body>
     <h2>Perolehan Suara Caleg Ciamis Dapil 6</h2>
+    <p>Data di ambil dari Sirekap KPU by Apik Wibisono</p>
+    <p>
+      Jumlah TPS Masuk: <span id="total-tps"></span> dari
+      <span id="total-tps-count"></span> TPS (<span id="progress"></span>%)
+    </p>
 
     <table id="data-table">
       <thead>
@@ -38,7 +43,7 @@
       </thead>
       <tbody></tbody>
     </table>
-    <h4>Data di ambil dari Sirekap KPU by Apik Wibisono</h4>
+
     <script>
       function formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -63,6 +68,17 @@
         .then((response) => response.json())
         .then((data) => {
           const tableBody = document.querySelector("#data-table tbody");
+          const totalTPS = document.getElementById("total-tps");
+          const totalTPSCount = document.getElementById("total-tps-count");
+          const progress = document.getElementById("progress");
+
+          totalTPS.textContent = data.progres.total;
+          totalTPSCount.textContent = data.progres.progres;
+          progress.textContent = (
+            (data.progres.progres / data.progres.total) *
+            100
+          ).toFixed(2);
+
           let counter = 1;
           Object.entries(data.table)
             .sort((a, b) => b[1].jml_suara_total - a[1].jml_suara_total)
@@ -83,12 +99,12 @@
               }
               const maxIndex = Object.keys(item).indexOf(maxKey) + 1;
               row.innerHTML = `
-                  <td>${counter}</td>
-                  <td>${formatNumber(item.jml_suara_total)}</td>
-                  <td>${formatNumber(maxVal)}</td>
-                  <td>${partyMap[key] || key}</td>
-                  <td>${maxIndex}</td>
-              `;
+              <td>${counter}</td>
+              <td>${formatNumber(item.jml_suara_total)}</td>
+              <td>${formatNumber(maxVal)}</td>
+              <td>${partyMap[key] || key}</td>
+              <td>${maxIndex}</td>
+          `;
               tableBody.appendChild(row);
               counter++;
             });
